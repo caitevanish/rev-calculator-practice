@@ -1,12 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Calculator</title>
-</head>
-<body>
-  
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>Calculator!</h1>
+        <h4>Type here</h4>
+        <input id="inputOne" type="text" value="" /><br />
+        <input id="inputTwo" type="text" value="" />
+      </div>
+      <div class="operations">
+        <button data-operation="add">+</button>
+        <button data-operation="sub">-</button>
+        <button data-operation="mult">x</button>
+        <button data-operation="div">/</button>
+      </div>
+      <div class="history">
+        <h4>Answer:</h4>
+        <p id="answer"></p>
+        <h3>History</h3>
+        <ul id="calcHist">
+          <li>0</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+
+  <script>
+    let result = 0;
+    const calcAnswer = document.getElementById('answer');
+    const history = document.getElementById('calcHist');
+
+    //   // ------CHECK FOR NUMBERS ONlY!
+    //   // if (!element == [numbers]) {
+    //   //   alert('Only type in numbers!');
+    //   // }
+
+    document.addEventListener('click', function (event) {
+      const target = event.target;
+      const firstNum = Number(document.getElementById('inputOne').value);
+      const secondNum = Number(document.getElementById('inputTwo').value);
+      const operation = target.dataset.operation;
+      let symbol;
+      const calcHistory = [];
+
+      if (operation === 'add') {
+        symbol = '+';
+        result = firstNum + secondNum;
+        console.log(result);
+      }
+      if (operation === 'sub') {
+        symbol = '-';
+        result = firstNum - secondNum;
+      }
+      if (operation === 'mult') {
+        symbol = 'x';
+        result = firstNum * secondNum;
+      }
+      if (operation === 'div') {
+        symbol = '/';
+        result = firstNum / secondNum;
+      }
+
+      //RETURNS
+      calcAnswer.innerText = result;
+      const listItem = `${firstNum} ${symbol} ${secondNum} = ${result}`;
+
+      const li = document.createElement('li');
+      li.innerText = listItem;
+      history.appendChild(li);
+
+      console.log(listItem);
+      console.log(calcHistory);
+    });
+  </script>
 </html>
